@@ -1,7 +1,6 @@
 import React from "react"
 import { VisualizationProps } from "."
 import {ScatterChart as RScatterPlot, XAxis, YAxis, ZAxis, Legend, Tooltip, Scatter, ResponsiveContainer} from "recharts"
-import randomColor from "randomcolor"
 import { scaleOrdinal } from 'd3-scale';
 import { schemeCategory10 } from 'd3-scale-chromatic';
 
@@ -43,28 +42,6 @@ const rangeFor = (data, key, scale=1) => {
   const min = Math.min(...values)
   console.log(min, max, values)
   return [min/scale, 3*max/scale]
-}
-
-const CustomToolTip = (event) => {
-  let {active, payload} = event
-  console.table(payload.map(p => p.payload))
-
-
-  if (active) {
-    payload = payload[0].payload 
-    return (
-      <div className="chart-tooltip">
-        <div>
-          <span>id: {payload.id}</span>
-          <span>friends: {payload.y}</span>
-          <span>followers: {payload.x}</span>
-          <span>score: {payload.z}</span>
-        </div>
-      </div>
-    )
-  }
-
-  return null
 }
 
 export const ScatterChart = (props: VisualizationProps) => {

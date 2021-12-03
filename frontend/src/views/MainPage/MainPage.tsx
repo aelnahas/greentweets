@@ -1,35 +1,12 @@
 import * as React from "react"
-import {Layout, Select} from "antd"
+import { Select} from "antd"
 import "./styles.css"
 import {Table} from "../Table"
 import { BASE_URL } from "../../utils/constants"
 import { Visualization } from "../Vizualization/Vizualization"
 import { VisualizationTypes } from "../Vizualization"
 
-const {Header, Content} = Layout
 const {Option} = Select
-
-const groupData = (data: any[], groupKey: string, metrics: string[]) => {
-  const groups = {}
-
-  data.forEach((entry) => {
-    const key = entry[groupKey]
-    if(!(key in groups)) {
-      const obj = {}
-      obj[groupKey] = key
-      metrics.forEach((metric) => {
-        obj[metric] = 0
-      })
-      groups[key] = obj
-    }
-
-    metrics.forEach((metric) => {
-      groups[key][metric] += entry[metric]
-    })
-  })
-
-  return Object.values(groups) as  any[]
-}
 
 export const MainPage = () => {
   const [data, setData] = React.useState([])

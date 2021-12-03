@@ -17,15 +17,15 @@ enum Metrics {
 
 const renderViz = (props: VisualizationProps) => {
   const {data, dimension, metric, vizType} = props
-  if (props.vizType == VisualizationTypes.BARCHART) {
+  if (props.vizType === VisualizationTypes.BARCHART) {
     return <BarChart data={data} dimension={dimension} metric={metric} vizType={vizType}/>
   }
 
-  if (props.vizType == VisualizationTypes.TREEMAP) {
+  if (props.vizType === VisualizationTypes.TREEMAP) {
     return <TreeMap data={data} dimension={dimension} metric={metric} vizType={vizType}/>
   }
 
-  if (props.vizType == VisualizationTypes.SCATTERCHART) {
+  if (props.vizType === VisualizationTypes.SCATTERCHART) {
     return <ScatterChart {...props}/>
   }
 
