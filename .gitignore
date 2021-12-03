@@ -10,3 +10,5 @@ frontend/node_modules
 .vs/
 .vscode/
 .DS_Store
+# Local Netlify folder
+.netlify
