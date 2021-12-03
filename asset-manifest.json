@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/greentweets/static/css/main.8c8b27cf.chunk.css",
+    "main.js": "/greentweets/static/js/main.211737ae.chunk.js",
+    "main.js.map": "/greentweets/static/js/main.211737ae.chunk.js.map",
+    "runtime-main.js": "/greentweets/static/js/runtime-main.d86401b4.js",
+    "runtime-main.js.map": "/greentweets/static/js/runtime-main.d86401b4.js.map",
+    "static/js/2.fa9ea962.chunk.js": "/greentweets/static/js/2.fa9ea962.chunk.js",
+    "static/js/2.fa9ea962.chunk.js.map": "/greentweets/static/js/2.fa9ea962.chunk.js.map",
+    "static/js/3.2bb8242a.chunk.js": "/greentweets/static/js/3.2bb8242a.chunk.js",
+    "static/js/3.2bb8242a.chunk.js.map": "/greentweets/static/js/3.2bb8242a.chunk.js.map",
+    "index.html": "/greentweets/index.html",
+    "static/css/main.8c8b27cf.chunk.css.map": "/greentweets/static/css/main.8c8b27cf.chunk.css.map",
+    "static/js/2.fa9ea962.chunk.js.LICENSE.txt": "/greentweets/static/js/2.fa9ea962.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/greentweets/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d86401b4.js",
+    "static/js/2.fa9ea962.chunk.js",
+    "static/css/main.8c8b27cf.chunk.css",
+    "static/js/main.211737ae.chunk.js"
+  ]
+}
