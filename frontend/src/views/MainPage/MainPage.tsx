@@ -5,7 +5,6 @@ import {Table} from "../Table"
 import { BASE_URL } from "../../utils/constants"
 import { Visualization } from "../Vizualization/Vizualization"
 import { VisualizationTypes } from "../Vizualization"
-import { commandRegistryModule } from "@antv/xflow-core"
 
 const {Option} = Select
 const {Search} = Input
@@ -24,8 +23,6 @@ export const MainPage = () => {
   const [dimension, setDimension] = React.useState<any>("key_word")
   const [metric, setMetric] = React.useState("followers")
   const [vizType, setVizType] = React.useState(VisualizationTypes.BARCHART)
-  const [keywords, setKeywords] = React.useState([])
-  const [filter, setFilter] = React.useState([])
   const [filteredData, setFilteredData] = React.useState([])
 
   React.useEffect(() => {
@@ -35,18 +32,6 @@ export const MainPage = () => {
       if (response.ok) {
         const table = await response.json()
         setData(table)
-      }
-    }
-
-    fetchData()
-  }, [])
-
-  React.useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(`${BASE_URL()}/queries/keywords`);
-
-      if (response.ok) {
-        setKeywords(await response.json())
       }
     }
 
@@ -63,7 +48,6 @@ export const MainPage = () => {
 
   const handleFilterChange = (event) => {
     const term = event.target.value
-    setFilter(term)
     setFilteredData(filterData(data, term))
   }
 
