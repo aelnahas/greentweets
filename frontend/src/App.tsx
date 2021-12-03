@@ -14,7 +14,7 @@ function App() {
     }
 
     fetchData()
-  }, [data])
+  }, [])
 
   return (
     <div className="App">
