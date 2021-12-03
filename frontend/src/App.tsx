@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import {BASE_URL} from "./utils/constants"
 
 function App() {
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(`${BASE_URL()}/queries/raw`)
+      const newData = await response.json()
+      console.log(newData)
+      setData(newData)
+    }
+
+    fetchData()
+  }, [data])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        {Object.keys(data).length}
+      </div>
     </div>
   );
 }
