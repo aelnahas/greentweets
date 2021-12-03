@@ -1,17 +1,33 @@
-#components-layout-demo-side .logo {
-  height: 32px;
-  margin: 16px;
-  background: rgba(255, 255, 255, 0.3);
+@import '~antd/dist/antd.css';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
 }
 
-.site-layout .site-layout-background {
-  background: #fff;
+.navbar {
+  display: flex;
+  align-content: center;
 }
 
-.content {
-  padding: 0 50px
+.header {
+  margin-bottom: 30px;
+  height: 60px;
+  background-color: #2980B9;
 }
 
-.layout {
-  min-height: 100vh;
+.item {
+  height: 100%;
+  width: 90%;
+  margin-bottom: 30px;
+}
+
+.container__viz {
+  margin-top: 30px;
+  min-height: 70%;
+}
+
+.container__table {
+  max-height: 30%;
 }

@@ -60,28 +60,10 @@ const COLUMNS = [
   }
 ]
 
-const transformTable = (table: any) => {
-  console.log(table)
-  return table
+interface TableProps {
+  data: any[]
 }
 
-export const Table = () => {
-  const [data, setData] = React.useState([])
-  React.useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(`${BASE_URL()}/queries/raw`);
-
-      if (response.ok) {
-        const table = await response.json()
-        setData(transformTable(table))
-      }
-    }
-
-    fetchData()
-  }, [])
-
-
-  return (
-      <AntDTable columns={COLUMNS} dataSource={data}/>
-    )
+export const Table = (props: TableProps) => {
+  return <AntDTable columns={COLUMNS} dataSource={props.data}/>
 }

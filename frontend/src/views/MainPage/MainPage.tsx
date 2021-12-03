@@ -1,57 +1,106 @@
 import * as React from "react"
-import {Layout, Menu} from "antd"
+import {Layout, Select} from "antd"
 import "./styles.css"
 import {Table} from "../Table"
+import { BASE_URL } from "../../utils/constants"
+import { Visualization } from "../Vizualization/Vizualization"
+import { VisualizationTypes } from "../Vizualization"
 
-const {Header, Content, Sider} = Layout
+const {Header, Content} = Layout
+const {Option} = Select
 
-enum Selection {
-  INFLUENCERS = "influencers",
-  DONATIONS = "donations",
-  IMPRESSIONS = "impressions",
-  TABLE = "table"
-}
+const groupData = (data: any[], groupKey: string, metrics: string[]) => {
+  const groups = {}
 
-const RenderViz = (key: string) => {
-  switch(key) {
-    case Selection.INFLUENCERS:
-      return <div>influencers viz</div>
-    case Selection.DONATIONS:
-      return <div>donations viz</div>
-    case Selection.IMPRESSIONS:
-      return <div>impressions viz</div>
-    default:
-      return <Table/>
-  }
+  data.forEach((entry) => {
+    const key = entry[groupKey]
+    if(!(key in groups)) {
+      const obj = {}
+      obj[groupKey] = key
+      metrics.forEach((metric) => {
+        obj[metric] = 0
+      })
+      groups[key] = obj
+    }
+
+    metrics.forEach((metric) => {
+      groups[key][metric] += entry[metric]
+    })
+  })
+
+  return Object.values(groups) as  any[]
 }
 
 export const MainPage = () => {
-  const [collapsed, setCollapsed] = React.useState<boolean|undefined>(false);
-  const [selection, setSelection] = React.useState<string>(Selection.INFLUENCERS)
-  const onCollapse = (status: boolean) => {setCollapsed(status)}
+  const [data, setData] = React.useState([])
+  const [dimension, setDimension] = React.useState<any>("key_word")
+  const [metric, setMetric] = React.useState("followers")
+  const [vizType, setVizType] = React.useState(VisualizationTypes.BARCHART)
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(`${BASE_URL()}/queries/raw`);
+
+      if (response.ok) {
+        const table = await response.json()
+        setData(table)
+      }
+    }
+
+    fetchData()
+  }, [])
+
+  const onSelectDimension = (value) => {
+    setDimension(value)
+  }
+
+  const onSelectMetric = (value) => {
+    setMetric(value)
+  }
 
   return (
-    <Layout className="layout">
-      <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
-        <Menu defaultSelectedKeys={[Selection.INFLUENCERS]} 
-          mode="inline"
-          theme="dark"
-          onSelect= {({key}) => setSelection(key)}
+    <div className="container">
+      <header className="header">
+        <nav className="navbar">
+          <Select
+            showSearch
+            placeholder="select metric"
+            onSelect={onSelectMetric}
           >
-          <Menu.Item key={Selection.INFLUENCERS}>Influencers</Menu.Item>
-          <Menu.Item key={Selection.DONATIONS}>Donations</Menu.Item>
-          <Menu.Item key={Selection.IMPRESSIONS}>Impressions</Menu.Item>
-          <Menu.Item key={Selection.TABLE}>Table</Menu.Item>
-        </Menu>
-      </Sider>
-      <Layout className="site-layout">
-        <Header className="site-layout-background" style={{ padding: 0 }} />
-        <Content className="site-layout-background content">
-          <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-              {RenderViz(selection)}
-          </div>
-        </Content>
-      </Layout>
-    </Layout>
+            <Option value="followers">Followers</Option>
+            <Option value="retweets">Retweets</Option>
+            <Option value="friends">Friends</Option>
+            <Option value="User_Score">Score</Option>
+            <Option value="likes">Likes</Option>
+          </Select>
+
+          <Select
+            showSearch
+            placeholder="select dimension"
+            onSelect={onSelectDimension}
+          >
+            <Option value="location">Location</Option>
+            <Option value="key_word">Keyword</Option>
+          </Select>
+
+          <Select
+            showSearch
+            placeholder="select viz"
+            onSelect={(value: any) => { setVizType(value)}}
+          >
+            <Option value="treemap">Treemap</Option>
+            <Option value="geomap">Geo map</Option>
+            <Option value={VisualizationTypes.BARCHART}>BartChart</Option>
+            <Option value={VisualizationTypes.SCATTERCHART}>ScatterChart</Option>
+          </Select>
+        </nav>
+      </header>
+      <div className="item">
+        <Visualization data={data} metric={metric} dimension={dimension} vizType={vizType}/>
+      </div>
+      <div className="item container__table">
+        <Table data={data}/>
+      </div>
+    </div>
   )
 }
