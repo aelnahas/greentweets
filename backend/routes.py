@@ -1,19 +1,12 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 import typing
-import orjson
 import backend.queries as queries
 from fastapi.middleware.cors import CORSMiddleware
 
 origins = ["*"]
 
-class ORJSONResponse(JSONResponse):
-    media_type = "application/json"
-
-    def render(self, content: typing.Any) -> bytes:
-        return orjson.dumps(content)
-
-app = FastAPI(default_response_class=ORJSONResponse)
+app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
@@ -43,4 +36,4 @@ def graphicals():
 
 @app.get("/queries/raw")
 def raw():
-  return queries.df.to_dict('records')
+  return queries.df.fillna('').to_dict('records')
