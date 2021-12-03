@@ -37,3 +37,7 @@ def graphicals():
 @app.get("/queries/raw")
 def raw():
   return queries.df.fillna('').to_dict('records')
+
+@app.get("/queries/keywords")
+def keywords():
+  return queries.unique_keywords()
