@@ -1,6 +1,5 @@
 import * as React from "react"
 import {Table as AntDTable} from "antd"
-import { BASE_URL } from "../../utils/constants"
 
 const COLUMNS = [
   {

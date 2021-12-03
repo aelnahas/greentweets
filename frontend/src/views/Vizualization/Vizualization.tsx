@@ -2,18 +2,18 @@ import React from "react"
 import { BarChart, TreeMap, VisualizationProps, VisualizationTypes } from "./components"
 import { ScatterChart } from "./components/ScatterChart"
 
-enum Dimensions {
-  LOCATION = "location",
-  KEYWORDS = "keywords"
-}
+// enum Dimensions {
+//   LOCATION = "location",
+//   KEYWORDS = "keywords"
+// }
 
-enum Metrics {
-  FOLLOWERS,
-  RETWEETS,
-  FRIENDS,
-  SCORE,
-  LOCAL
-}
+// enum Metrics {
+//   FOLLOWERS,
+//   RETWEETS,
+//   FRIENDS,
+//   SCORE,
+//   LOCAL
+// }
 
 const renderViz = (props: VisualizationProps) => {
   const {data, dimension, metric, vizType} = props
