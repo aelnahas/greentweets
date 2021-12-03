@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 # from fastapi.middleware.cores import CORSMiddleware
-import queries
+import backend.queries
 
 origins = ["*"]
 

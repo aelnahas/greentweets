@@ -1,6 +1,8 @@
 import pandas as pd
+import pathlib
 
-df = pd.read_csv("./tweetsv1.csv")
+csv = pathlib.Path("./backend/tweetsv1.csv")
+df = pd.read_csv(csv.resolve())
 
 def get_ranked():
   pass
