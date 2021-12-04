@@ -25,9 +25,15 @@ def group_by_keywords(keyword, key, metric):
   filtered = df[df["keyword"].str.contains(keyword)]
   return filtered.groupby(key).mean()[metric]
 
-def get_aggregated_metrics(key, metric):
+def get_aggregated_metrics(key, metric, country):
+  if len(country) > 0:
+    return get_region_aggregate_by_country(country, key, metric)
   averages = df.groupby(key).mean()[metric]
   return averages
+
+def get_region_aggregate_by_country(country, key, metrics):
+  filtered = df[ df["country"] == country]
+  return filtered.groupby(key).mean()[metrics]
 
 
 def get_geographical_impressions():

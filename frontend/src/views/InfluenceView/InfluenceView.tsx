@@ -81,7 +81,9 @@ export const InfluenceView = () => {
           >
           <Option value="city">City</Option>
           <Option value="country">Country</Option>
-          <Option value="region">Region</Option>
+          <Option value="region-Canada">Region-Canada</Option>
+          <Option value="region-United States">Region-US</Option>
+          <Option value="region">All Regions</Option>
         </Select>
         <Select
           showSearch

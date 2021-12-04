@@ -22,20 +22,30 @@ interface ChartData {
 }
 
 const convertData = (data, metric, groupBy): any[] => {
+  console.log(data)
+  if (groupBy.includes("-")) {
+    const split = groupBy.split("-")
+    groupBy = split[0]
+  }
   let converted: any[] =  Object.keys(data).map((key) => ({[groupBy]: key, [metric]: data[key]}))
   if (metric === "user_score") {
     converted = converted.map(
       (entry) => ({ ...entry, [metric]: Math.log10(entry[metric]) }))
-    console.log(converted)
   }
   
   return converted
 }
 
-const getURL = (keyword, groupBy, metric) => {
-  let url:string = `${BASE_URL()}/queries/averages?key=${groupBy}&metric=${metric}`
+const getURL = (groupBy: string, metric: string, keyword?: string) => {
+  let country=""
+  if (groupBy.includes("-")) {
+    const split = groupBy.split("-")
+    country = split[1]
+    groupBy = split[0]
+  }
+  let url:string = `${BASE_URL()}/queries/averages?key=${groupBy}&metric=${metric}&country=${country}`
   if (keyword) {
-    url =  `${BASE_URL()}/queries/averaged-by-keywords?key=${groupBy}&metric=${metric}&keyword=${keyword}`
+    url =  `${BASE_URL()}/queries/averaged-by-keywords?key=${groupBy}&metric=${metric}&keyword=${keyword}&country=${country}`
   }
 
   console.log(url)
@@ -44,7 +54,7 @@ const getURL = (keyword, groupBy, metric) => {
 
 export const GroupedByBarChart  = ({keyword, groupBy, metric, color}: GraphsProps) => {
   const [data, setData] = useState<ChartData[]>([])
-  const url = getURL(keyword, groupBy, metric)
+  const url = getURL(groupBy, metric, keyword)
   useEffect(() => {
     const fetchData = async () => {
       const resp = await fetch(url)
@@ -53,6 +63,11 @@ export const GroupedByBarChart  = ({keyword, groupBy, metric, color}: GraphsProp
     } 
     fetchData()
   }, [groupBy, metric, keyword, url])
+
+  if (groupBy.includes("-")) {
+    const split = groupBy.split("-")
+    groupBy = split[0]
+  }
 
   return (
       <ResponsiveContainer width="100%" height="100%" minHeight={300}>

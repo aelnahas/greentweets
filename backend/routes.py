@@ -41,8 +41,8 @@ def raw():
 
 
 @app.get("/queries/averages")
-def averages(metric: str, key: str = None):
-  averages = queries.get_aggregated_metrics(key, metric)
+def averages(metric: str, key: str = None, country:str = None):
+  averages = queries.get_aggregated_metrics(key, metric, country)
   return averages.fillna('').to_dict()
 
 @app.get("/queries/sorted-scores")

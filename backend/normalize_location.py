@@ -2,8 +2,9 @@ import pandas as pd
 from pandas.core.algorithms import mode
 import googlemaps
 import json
+import os
 
-api_key = "AIzaSyDh8hxy81zaWgZPsfCDwNwfQfrUhTtybaA"
+api_key = os.environ.get("API_KEY") 
 
 gmaps = googlemaps.Client(key=api_key)
 

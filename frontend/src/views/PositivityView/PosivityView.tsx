@@ -1,6 +1,6 @@
 import React from "react"
 import {Row, Col} from "antd"
-import PositivityImage from "./positivity.png"
+import PositivityImage from "./positivity2.png"
 import TweetScorePositivity from "./tweetscore-sentiment.png"
 import UserScorePositivity from "./userscore-sentiment.png"
 
