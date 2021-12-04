@@ -20,6 +20,8 @@ export const PositivityView = () => {
         <Col span={8}>
           <img src={UserScorePositivity} alt="potivity-graph"/>
         </Col>
+        </Row>
+        <Row>
         <Col span={8}>
           <img src={Table} alt="table-graph"/>
         </Col>
