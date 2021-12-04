@@ -56,5 +56,5 @@ def keywords():
   return queries.unique_keywords()
 
 @app.get("/queries/averaged-by-keywords")
-def group_by_keywords(metric: str, key: str = None, keyword: str = ""):
-  return queries.group_by_keywords(keyword, key, metric).fillna('').to_dict()
+def group_by_keywords(metric: str, key: str = None, keyword: str = "", country: str = ""):
+  return queries.group_by_keywords(keyword, key, metric, country).fillna('').to_dict()

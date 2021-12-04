@@ -21,11 +21,13 @@ def get_ranked_user_score():
   return df.sort_values('user_score').tail(10)
 
 
-def group_by_keywords(keyword, key, metric):
-  filtered = df[df["keyword"].str.contains(keyword)]
+def group_by_keywords(keyword, key, metric, country=""):
+  if len(country) > 0:
+    filtered = df[df["country"] == country]
+  filtered = filtered[filtered["keyword"].str.contains(keyword)]
   return filtered.groupby(key).mean()[metric]
 
-def get_aggregated_metrics(key, metric, country):
+def get_aggregated_metrics(key, metric, country=""):
   if len(country) > 0:
     return get_region_aggregate_by_country(country, key, metric)
   averages = df.groupby(key).mean()[metric]
