@@ -3,6 +3,7 @@ from fastapi.responses import JSONResponse
 import typing
 import backend.queries as queries
 from fastapi.middleware.cors import CORSMiddleware
+import json
 
 origins = ["*"]
 
@@ -38,6 +39,22 @@ def graphicals():
 def raw():
   return queries.df.fillna('').to_dict('records')
 
+
+@app.get("/queries/averages")
+def averages(metric: str, key: str = None):
+  averages = queries.get_aggregated_metrics(key, metric)
+  return averages.fillna('').to_dict()
+
+@app.get("/queries/sorted-scores")
+def averages():
+  averages = queries.get_ranked_user_score()
+  return averages.fillna('').to_dict('records')
+
+
 @app.get("/queries/keywords")
 def keywords():
   return queries.unique_keywords()
+
+@app.get("/queries/averaged-by-keywords")
+def group_by_keywords(metric: str, key: str = None, keyword: str = ""):
+  return queries.group_by_keywords(keyword, key, metric).fillna('').to_dict()

@@ -1,2 +1,2 @@
 export * from "./MainPage"
-export * from "./Table"
+export * from "../components/Table"

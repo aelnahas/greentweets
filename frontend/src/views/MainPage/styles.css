@@ -23,6 +23,10 @@
   margin-bottom: 30px;
 }
 
+.content {
+  margin: 0 50px;
+}
+
 .container__viz {
   margin-top: 30px;
   min-height: 70%;
