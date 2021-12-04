@@ -3,11 +3,14 @@ import { BarChart, ResponsiveContainer, XAxis, YAxis, Bar, Legend, Tooltip } fro
 import { BASE_URL } from "../../../utils/constants"
 
 const transform = (data) => {
-  return data.map((entry, idx) => ({
+  return data.map((entry, idx) => {
+    const newEntry = {
     [idx]: idx,
     user_score: Math.log10(entry.user_score),
     ...entry
-  })).reverse()
+  }
+    return newEntry
+  }).reverse()
 }
 
 export const UserScoreRanking = () => {
