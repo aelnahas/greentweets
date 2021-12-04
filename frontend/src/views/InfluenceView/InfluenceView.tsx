@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import {Input, Select, Layout, Row, Col, Space, Divider} from "antd"
+import { Select,Row, Col, Divider} from "antd"
 import { BASE_URL } from "../../utils/constants"
 import {Table} from "../../components/Table"
 import { GroupedByBarChart } from "./components/Graphs"

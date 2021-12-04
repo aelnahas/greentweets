@@ -23,7 +23,7 @@ interface ChartData {
 
 const convertData = (data, metric, groupBy): any[] => {
   let converted: any[] =  Object.keys(data).map((key) => ({[groupBy]: key, [metric]: data[key]}))
-  if (metric == "user_score") {
+  if (metric === "user_score") {
     converted = converted.map(
       (entry) => ({ ...entry, [metric]: Math.log10(entry[metric]) }))
     console.log(converted)
@@ -52,7 +52,7 @@ export const GroupedByBarChart  = ({keyword, groupBy, metric, color}: GraphsProp
       setData(convertData(respData, metric, groupBy))
     } 
     fetchData()
-  }, [groupBy, metric, keyword])
+  }, [groupBy, metric, keyword, url])
 
   return (
       <ResponsiveContainer width="100%" height="100%" minHeight={300}>

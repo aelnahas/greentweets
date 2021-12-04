@@ -8,7 +8,7 @@ const {Header, Content} = Layout
 
 const renderSelection = (selection) => {
   console.log(selection)
-  if (selection == "positivity") {
+  if (selection === "positivity") {
     return <PositivityView/>
   } else {
     return <InfluenceView/>
