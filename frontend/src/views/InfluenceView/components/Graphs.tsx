@@ -55,6 +55,13 @@ const getURL = (groupBy: string, metric: string, keyword?: string) => {
 export const GroupedByBarChart  = ({keyword, groupBy, metric, color}: GraphsProps) => {
   const [data, setData] = useState<ChartData[]>([])
   const url = getURL(groupBy, metric, keyword)
+  let country = ""
+  if (groupBy.includes("-")) {
+    const split = groupBy.split("-")
+    groupBy = split[0]
+    country = split[1]
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       const resp = await fetch(url)
@@ -62,12 +69,8 @@ export const GroupedByBarChart  = ({keyword, groupBy, metric, color}: GraphsProp
       setData(convertData(respData, metric, groupBy))
     } 
     fetchData()
-  }, [groupBy, metric, keyword, url])
+  }, [groupBy, metric, keyword, url, country])
 
-  if (groupBy.includes("-")) {
-    const split = groupBy.split("-")
-    groupBy = split[0]
-  }
 
   return (
       <ResponsiveContainer width="100%" height="100%" minHeight={300}>

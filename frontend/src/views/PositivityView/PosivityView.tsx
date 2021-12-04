@@ -3,6 +3,7 @@ import {Row, Col} from "antd"
 import PositivityImage from "./positivity2.png"
 import TweetScorePositivity from "./tweetscore-sentiment.png"
 import UserScorePositivity from "./userscore-sentiment.png"
+import Table from "./table.png"
 
 export const PositivityView = () => {
   return (
@@ -18,6 +19,9 @@ export const PositivityView = () => {
       <Row gutter={8}>
         <Col span={8}>
           <img src={UserScorePositivity} alt="potivity-graph"/>
+        </Col>
+        <Col span={8}>
+          <img src={Table} alt="table-graph"/>
         </Col>
       </Row>
     </div>
